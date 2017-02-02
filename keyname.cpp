@@ -1,4 +1,5 @@
 #include <keyname.h>
+#include <cstring>
 
 static const char *charList[] = {UNKNOWN_KEY, "<ESC>", "1", "2", "3", "4", "5",
                                     "6", "7", "8", "9", "0", "-", "=",
@@ -46,7 +47,26 @@ static const char *shiftCharList[] = {UNKNOWN_KEY, "<ESC>", "!", "@", "#", "$", 
  * return: real keystroke for the place of number
  * use: at line no. 37 in main.cpp
 **/
-const char *getKey(int a)
+const char *getKey(int a, bool shiftPressed)
 {
-    return charList[a];
+    if(shiftPressed)
+        return shiftCharList[a];
+    else
+        return charList[a];
+}
+
+const bool isShift(int a)
+{
+    if(std::strcmp(charList[a], "<L-SHIFT>") == 0 || std::strcmp(charList[a], "<R-SHIFT>") == 0)
+        return true;
+    else
+        return false;
+}
+
+const bool isCaps(int a)
+{
+    if(std::strcmp(charList[a], "<CAPSLOCK>") == 0)
+        return true;
+    else
+        return false;
 }

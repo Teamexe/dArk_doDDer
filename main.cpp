@@ -11,6 +11,7 @@
 
 //my libraries
 #include <keyname.h>
+#include <util.h>
 
 //type definations
 
@@ -26,19 +27,22 @@ int main()
     input_event eve;
     checkRoot();
     kbd_Fd = openKeyboardFile();
+    bool shiftPressed = false, capsActive = false; //TODO(lordPoseidon) debug the capsActive error
     while(read(kbd_Fd, &eve, sizeof(input_event)) > 0)
     {
-        // here we solve the multiple outputs when a key is pressed down for some time
-        //by the check eve.value=1
-        if(eve.value == 1)
+        if(eve.type == EV_KEY)
         {
-            if(eve.type == EV_KEY)
-            {
-                std::cout << getKey(eve.code) << std::endl;
-            }
-            if(eve.type == EV_KEY && eve.code == 1)
-                break;
+            if(eve.value == KEY_RELEASE && isCaps(eve.code))
+                capsActive = !capsActive;
+            if(eve.value == KEY_PRESS && isShift(eve.code))
+                shiftPressed = !capsActive;
+            if(eve.value == KEY_RELEASE && isShift(eve.code))
+                shiftPressed = capsActive;
+            if(eve.value == KEY_PRESS)
+                std::cout << getKey(eve.code, shiftPressed) << std::endl;
         }
+        if(eve.type == EV_KEY && eve.code == 1)
+            break;
     }
     close(kbd_Fd);
     return 0;

@@ -3,6 +3,8 @@
 
 #define UNKNOWN_KEY "-1"
 
-const char *getKey(int);
+const char *getKey(int a, bool shiftPressed);
+const bool isShift(int);
+const bool isCaps(int);
 
 #endif
