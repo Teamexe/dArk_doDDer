@@ -19,7 +19,7 @@ static const char *charList[] = {UNKNOWN_KEY, "<ESC>", "1", "2", "3", "4", "5",
                                     "PG-DOWN", "INSERT", "DEL", UNKNOWN_KEY, UNKNOWN_KEY, 
                                     UNKNOWN_KEY, UNKNOWN_KEY, UNKNOWN_KEY, UNKNOWN_KEY, UNKNOWN_KEY,
                                     "PAUSE"};
-                                    
+
 static const char *shiftCharList[] = {UNKNOWN_KEY, "<ESC>", "!", "@", "#", "$", "%",
                                     "^", "&", "*", "(", ")", "_", "+",
                                     "<Backspace>", "<Tab>", "Q", "W", "E", "R",
@@ -40,6 +40,12 @@ static const char *shiftCharList[] = {UNKNOWN_KEY, "<ESC>", "!", "@", "#", "$", 
                                     UNKNOWN_KEY, UNKNOWN_KEY, UNKNOWN_KEY, UNKNOWN_KEY, UNKNOWN_KEY,
                                     "PAUSE"};
 
+/**
+ * Function: getkey
+ * Arguments: change keyword hardware code to real number
+ * return: real keystroke for the place of number
+ * use: at line no. 37 in main.cpp
+**/
 const char *getKey(int a)
 {
     return charList[a];

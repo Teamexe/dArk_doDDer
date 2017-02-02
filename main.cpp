@@ -28,6 +28,8 @@ int main()
     kbd_Fd = openKeyboardFile();
     while(read(kbd_Fd, &eve, sizeof(input_event)) > 0)
     {
+        // here we solve the multiple outputs when a key is pressed down for some time
+        //by the check eve.value=1
         if(eve.value == 1)
         {
             if(eve.type == EV_KEY)
