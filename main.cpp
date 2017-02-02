@@ -9,6 +9,9 @@
 #include <iostream>
 #include <stdexcept>
 
+//my libraries
+#include <keyname.h>
+
 //type definations
 
 //function definations
@@ -25,12 +28,15 @@ int main()
     kbd_Fd = openKeyboardFile();
     while(read(kbd_Fd, &eve, sizeof(input_event)) > 0)
     {
-        if(eve.type == EV_KEY)
+        if(eve.value == 1)
         {
-            std::cout << eve.code << std::endl;
+            if(eve.type == EV_KEY)
+            {
+                std::cout << getKey(eve.code) << std::endl;
+            }
+            if(eve.type == EV_KEY && eve.code == 1)
+                break;
         }
-        if(eve.type == EV_KEY && eve.code == 2)
-            break;
     }
     close(kbd_Fd);
     return 0;
