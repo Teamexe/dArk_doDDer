@@ -14,7 +14,7 @@
 #include <util.h>
 
 //type definations
-
+ 
 //function definations
 static void checkRoot(void);
 static const char *getKeyboardFile(void) noexcept;
@@ -27,13 +27,16 @@ int main()
     input_event eve;
     checkRoot();
     kbd_Fd = openKeyboardFile();
-    bool shiftPressed = false, capsActive = false; //TODO(lordPoseidon) debug the capsActive error
+    bool shiftPressed = false, capsActive = false;
     while(read(kbd_Fd, &eve, sizeof(input_event)) > 0)
     {
         if(eve.type == EV_KEY)
         {
             if(eve.value == KEY_RELEASE && isCaps(eve.code))
+            {
                 capsActive = !capsActive;
+                shiftPressed = capsActive;
+            }
             if(eve.value == KEY_PRESS && isShift(eve.code))
                 shiftPressed = !capsActive;
             if(eve.value == KEY_RELEASE && isShift(eve.code))
