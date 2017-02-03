@@ -1,5 +1,11 @@
+DIRECTORY = bin/
+
 all:
 	cd lib/getoptpp && make
+	if [ ! -d bin/ ];\
+	then\
+		mkdir bin/ ;\
+	fi
 	g++ -Wall -std=c++11 -I. main.cpp -c
 	mv main.o bin/
 	g++ -Wall -std=c++11 -I. keyname.cpp -c
