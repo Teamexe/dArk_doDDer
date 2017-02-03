@@ -33,16 +33,13 @@ int main()
         if(eve.type == EV_KEY)
         {
             if(eve.value == KEY_RELEASE && isCaps(eve.code))
-            {
                 capsActive = !capsActive;
-                shiftPressed = capsActive;
-            }
             if(eve.value == KEY_PRESS && isShift(eve.code))
-                shiftPressed = !capsActive;
+                shiftPressed = true;
             if(eve.value == KEY_RELEASE && isShift(eve.code))
-                shiftPressed = capsActive;
+                shiftPressed = false;
             if(eve.value == KEY_PRESS)
-                std::cout << getKey(eve.code, shiftPressed) << std::endl;
+                std::cout << getKey(eve.code, shiftPressed, capsActive) << std::endl;
         }
         if(eve.type == EV_KEY && eve.code == 1)
             break;
