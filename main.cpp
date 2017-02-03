@@ -42,6 +42,18 @@ int main(int argc, char **argv)
 
     std::fstream fleObj;
 
+    if(args >> GetOpt::OptionPresent('h', "help"))
+    {
+        printHelpText();
+        exit(EXIT_SUCCESS);
+    }
+
+    if(args >> GetOpt::OptionPresent('v', "version"))
+    {
+        printVersionInfo();
+        exit(EXIT_SUCCESS);
+    }
+
     if(args >> GetOpt::OptionPresent('s', "stdout"))
         isStdOut = true;
 
