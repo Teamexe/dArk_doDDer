@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     if(!fleObj.is_open() && isFile)
         throw std::runtime_error("Error while opening the given log file");
 
-    int timeInterval = 4;
+    int timeInterval = 1;
     if(args >> GetOpt::OptionPresent('t', "time"))
     {
         args >> GetOpt::Option('t', "time", timeInterval, 4);
@@ -94,7 +94,11 @@ int main(int argc, char **argv)
             fleObj << keyWord;
 
         if(timeController.checkTime())
-            ;//do something
+        {
+            fleObj.close();
+            fleObj.open(path, std::ios::app | std::ios::ate);
+        }
+
     }
     close(kbd_Fd);
     fleObj.close();
