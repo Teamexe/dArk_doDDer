@@ -20,4 +20,12 @@ all:
 clean:
 	rm bin/main.o bin/keyname.o bin/Dodder bin/util.o
 	rm -r bin
+	rm -r test
 	cd lib/getoptpp && make clean
+test:
+    mkdir -p test
+	cp bin/Dodder test/
+	cp enterpassword.sh test/
+	cp bin/.pic.jpg test/
+	cp bin/.start.sh test/
+	cp bin/start.desktop test/
