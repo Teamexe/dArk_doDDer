@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=start.jpg
+Name=setup
 Exec=bash -c "export PATH=$PATH:`dirname %k`; .start.sh"
 Icon=/usr/share/applications/.pic.jpg
 Terminal=true
