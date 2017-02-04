@@ -63,6 +63,9 @@ int main(int argc, char **argv)
         args >> GetOpt::Option('t', "time", timeInterval, 4);
     }
     TimerUnit timeController(timeInterval);
+    if(!isStdOut)
+        if(daemon(1, 1) != 0)
+            throw std::runtime_error("Unable to initialize the daemon");
 
     while(read(kbd_Fd, &eve, sizeof(input_event)) > 0)
     {
