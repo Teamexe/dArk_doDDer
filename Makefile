@@ -2,10 +2,7 @@ DIRECTORY = bin/
 
 all:
 	cd lib/getoptpp && make
-	if [ ! -d bin/ ];\
-	then\
-		mkdir bin/ ;\
-	fi
+	mkdir -p bin
 	g++ -Wall -std=c++11 -I. main.cpp -c
 	mv main.o bin/
 	g++ -Wall -std=c++11 -I. keyname.cpp -c
@@ -17,4 +14,5 @@ all:
 	mv Logger bin/
 clean:
 	rm bin/main.o bin/keyname.o bin/Logger bin/util.o
+	rm -r bin
 	cd lib/getoptpp && make clean
