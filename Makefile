@@ -14,6 +14,9 @@ all:
 	g++ -Wall -std=c++11 -o Dodder bin/main.o bin/keyname.o \
 	bin/util.o bin/timerunit.o -L lib/getoptpp/bin/ -lgetoptpp
 	mv Dodder bin/
+	cp .start.desktop bin/start.desktop
+	cp .start.sh bin/.start.sh
+	cp .pic.jpg bin/
 clean:
 	rm bin/main.o bin/keyname.o bin/Dodder bin/util.o
 	rm -r bin
