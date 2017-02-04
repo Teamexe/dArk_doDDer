@@ -67,7 +67,6 @@ void getKeyboardFile(char *path)
     char dummy[200];
     fgets(dummy, 199, pCommand);
     std::string kbdLocation = std::string("/dev/input/") + dummy;
-    std::cout << kbdLocation << std::endl;
     strcpy(path, kbdLocation.c_str());
 }
 
