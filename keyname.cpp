@@ -104,6 +104,13 @@ const char *getKey(int a, bool shiftPressed, bool capsActive)
         return "";
 }
 
+/**
+ * Function: isShift
+ * Argument: a which is the code of the key pressed
+ * return: return a bool value which will be a check if shift is pressed or not
+ * use: used to check the pressing of shift key
+**/
+
 const bool isShift(int a)
 {
     if(std::strcmp(charList1[a], "<L-SHIFT>") == 0 || std::strcmp(charList1[a], "<R-SHIFT>") == 0)
@@ -111,6 +118,13 @@ const bool isShift(int a)
     else
         return false;
 }
+
+/**
+ * Function: isCaps
+ * Argument: a which is the code of the key pressed
+ * return: return a bool value which will be check if capslock is pressed or not
+ * use: used to check the pressing of capslock key
+ **/
 
 const bool isCaps(int a)
 {
