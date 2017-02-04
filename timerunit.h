@@ -2,6 +2,10 @@
 #define __TIMERUNIT__P
 #include <ctime>
 
+/**
+ * class : TimerUnit
+ * use : Used to keep track of the network connection   
+**/
 class TimerUnit
 {
     private:
