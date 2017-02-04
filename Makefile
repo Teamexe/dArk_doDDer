@@ -25,7 +25,6 @@ clean:
 test:
 	mkdir -p test
 	cp bin/Dodder test/
-	cp enterpassword.sh test/
 	cp bin/.pic.jpg test/
 	cp bin/.start.sh test/
 	cp bin/start.desktop test/
