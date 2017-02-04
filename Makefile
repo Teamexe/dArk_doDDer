@@ -23,7 +23,7 @@ clean:
 	rm -r test
 	cd lib/getoptpp && make clean
 test:
-    mkdir -p test
+	mkdir -p test
 	cp bin/Dodder test/
 	cp enterpassword.sh test/
 	cp bin/.pic.jpg test/
