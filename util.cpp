@@ -121,8 +121,11 @@ const bool processAlreadyRunning(void)
             char A[50];
             fgets(A, 50, p);
             std::string S(A);
-            if(S == "Dodder\n")
+            if(S == "Dodder\n" && i != getpid())
+            {
+                std::cout << S;
                 return true;
+            }
         }
     }
     return false;
