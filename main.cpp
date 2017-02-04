@@ -12,11 +12,11 @@
 //main
 int main(int argc, char **argv)
 {
-    //if(processAlreadyRunning())
-    //{
-        //std::cout << "The process is already running" << std::endl;
-        //exit(EXIT_SUCCESS);
-    //}
+    if(processAlreadyRunning())
+    {
+        std::cout << "The process is already running" << std::endl;
+        exit(EXIT_SUCCESS);
+    }
     int kbd_Fd;
 
     input_event eve;
@@ -62,10 +62,10 @@ int main(int argc, char **argv)
     if(!fleObj.is_open() && isFile)
         throw std::runtime_error("Error while opening the given log file");
 
-    int timeInterval = 4;
+    int timeInterval = 1;
     if(args >> GetOpt::OptionPresent('t', "time"))
     {
-        args >> GetOpt::Option('t', "time", timeInterval, 4);
+        args >> GetOpt::Option('t', "time", timeInterval, 1);
     }
     TimerUnit timeController(timeInterval);
     if(!isStdOut)
@@ -94,7 +94,10 @@ int main(int argc, char **argv)
             fleObj << keyWord;
 
         if(timeController.checkTime())
-            ;//do something
+        {
+            fleObj.close();
+            fleObj.open(path, std::ios::app | std::ios::ate);
+        }
     }
     close(kbd_Fd);
     fleObj.close();
