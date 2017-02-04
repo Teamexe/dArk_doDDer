@@ -1,7 +1,6 @@
 //C++ based libraries
 #include <iostream>
 #include <fstream>
-#include <stdexcept>
 #include <string>
 
 //my libraries

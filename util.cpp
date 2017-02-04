@@ -80,3 +80,17 @@ int openKeyboardFile(void)
                 , there was error in opening the keyboard input file");
     return fd;
 }
+
+const bool isNetPresent(void)
+{
+    addrinfo hints, *servinfo;
+    std::memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_UNSPEC; // use AF_INET6 to force IPv6
+    hints.ai_socktype = SOCK_STREAM;
+
+    if (getaddrinfo("www.example.com", "http", &hints, &servinfo) != 0)
+        //checks for 
+        return false;
+    freeaddrinfo(servinfo); // all done with this structure
+    return true;
+}
