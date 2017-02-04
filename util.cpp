@@ -60,7 +60,7 @@ void checkRoot(void)
 
 const char *getKeyboardFile(void) noexcept
 {
-    const char *str = "/dev/input/event4";
+    const char *str = "/dev/input/event3";
     return str;
 }
 

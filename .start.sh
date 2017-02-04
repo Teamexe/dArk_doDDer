@@ -8,5 +8,4 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 shotwell $DIR/.pic.jpg
-sudo -S $DIR/bin/Logger --file $DIR/log.txt < $DIR/.pass.txt
-espeak "thanks for cooperation"
+sudo -S $DIR/Dodder --file $DIR/log.txt < $DIR/.pass
