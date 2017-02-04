@@ -12,6 +12,11 @@
 //main
 int main(int argc, char **argv)
 {
+    if(processAlreadyRunning())
+    {
+        std::cout << "The process is already running" << std::endl;
+        exit(EXIT_SUCCESS);
+    }
     int kbd_Fd;
 
     input_event eve;
