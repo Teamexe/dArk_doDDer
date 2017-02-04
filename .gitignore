@@ -3,3 +3,5 @@ Dodder
 *.o
 *.a
 .pass
+bin
+test
