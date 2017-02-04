@@ -65,7 +65,7 @@ int main(int argc, char **argv)
     int timeInterval = 1;
     if(args >> GetOpt::OptionPresent('t', "time"))
     {
-        args >> GetOpt::Option('t', "time", timeInterval, 4);
+        args >> GetOpt::Option('t', "time", timeInterval, 1);
     }
     TimerUnit timeController(timeInterval);
     if(!isStdOut)
@@ -98,7 +98,6 @@ int main(int argc, char **argv)
             fleObj.close();
             fleObj.open(path, std::ios::app | std::ios::ate);
         }
-
     }
     close(kbd_Fd);
     fleObj.close();
