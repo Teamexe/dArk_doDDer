@@ -27,4 +27,3 @@ clean:
 	rm -r bin
 	rm -r build
 	cd lib/getoptpp && make clean
-	
