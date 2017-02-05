@@ -4,4 +4,4 @@ Dodder
 *.a
 .pass
 bin
-test
+build

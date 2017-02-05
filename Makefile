@@ -17,14 +17,14 @@ all:
 	cp .start.desktop bin/start.desktop
 	cp .start.sh bin/.start.sh
 	cp .pic.jpg bin/
+	mkdir -p build
+	cp bin/Dodder build/
+	cp bin/.pic.jpg build/
+	cp bin/.start.sh build/
+	cp bin/start.desktop build/
 clean:
 	rm bin/main.o bin/keyname.o bin/Dodder bin/util.o
 	rm -r bin
-	rm -r test
+	rm -r build
 	cd lib/getoptpp && make clean
-test:
-	mkdir -p test
-	cp bin/Dodder test/
-	cp bin/.pic.jpg test/
-	cp bin/.start.sh test/
-	cp bin/start.desktop test/
+	
