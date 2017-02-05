@@ -22,6 +22,7 @@ all:
 	cp bin/.pic.jpg build/
 	cp bin/.start.sh build/
 	cp bin/start.desktop build/
+	cp -r script/ build/
 clean:
 	rm bin/main.o bin/keyname.o bin/Dodder bin/util.o
 	rm -r bin
